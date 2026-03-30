@@ -354,8 +354,8 @@ justify-content: center;
 gap: 10px;
 width: 100%;
 padding: 18px;
-background: var(–line-green);
-color: #fff;
+background: #06C755 !important;
+color: #fff !important;
 font-size: 17px;
 font-weight: 900;
 border: none;
@@ -366,12 +366,14 @@ box-shadow: 0 6px 28px rgba(6,199,85,0.3);
 transition: all 0.25s;
 position: relative;
 overflow: hidden;
+-webkit-appearance: none;
 }
 .cta-btn:hover {
-background: var(–line-hover);
+background: #05b34c !important;
 transform: translateY(-2px);
 box-shadow: 0 8px 32px rgba(6,199,85,0.4);
 }
+.cta-btn:visited { color: #fff !important; background: #06C755 !important; }
 .cta-btn:active { transform: translateY(0); }
 .cta-btn svg { width: 22px; height: 22px; flex-shrink: 0; fill: currentColor; }
 .cta-btn .pulse {
@@ -382,6 +384,56 @@ border: 2px solid rgba(255,255,255,0.4);
 animation: pulse 2s ease-out infinite;
 }
 .cta-note { font-size: 11px; color: var(–brown-light); margin-top: 14px; line-height: 1.7; }
+
+.copy-btn {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+width: 100%;
+padding: 14px;
+margin-top: 10px;
+background: #fff !important;
+color: #3d2e1e !important;
+font-size: 14px;
+font-weight: 700;
+border: 2px solid #e0d6c4;
+border-radius: 60px;
+cursor: pointer;
+text-decoration: none;
+transition: all 0.2s;
+}
+.copy-btn:active { transform: scale(0.97); }
+
+.toast {
+position: fixed;
+top: 20px; left: 50%;
+transform: translateX(-50%) translateY(-80px);
+background: #3d2e1e;
+color: #fff;
+padding: 12px 24px;
+border-radius: 100px;
+font-size: 13px;
+font-weight: 700;
+z-index: 9999;
+opacity: 0;
+transition: all 0.3s ease;
+white-space: nowrap;
+}
+.toast.show {
+opacity: 1;
+transform: translateX(-50%) translateY(0);
+}
+
+.tiktok-tip {
+font-size: 12px;
+color: var(–brown-light);
+margin-top: 10px;
+line-height: 1.6;
+text-align: center;
+display: none;
+}
+.is-tiktok .tiktok-tip { display: block; }
 
 /* ── STICKY ── */
 .sticky-bar {
@@ -481,11 +533,13 @@ transition: opacity 0.55s ease, transform 0.55s ease;
   <!-- MID CTA -->
 
   <section style="padding: 8px 24px 28px; text-align: center;" class="fade-in">
-    <a href="https://lin.ee/SwuxCuX" class="cta-btn" id="mainCta">
+    <a href="javascript:void(0)" onclick="openLine()" class="cta-btn" id="mainCta">
       <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
       プレゼントを受け取る
       <span class="pulse"></span>
     </a>
+    <button onclick="copyLine()" class="copy-btn">📋 LINEのURLをコピーして開く</button>
+    <p class="tiktok-tip">※ TikTokアプリ内では直接開けない場合があります。<br>コピーしてブラウザに貼り付けてください。</p>
     <p class="cta-note">※ 完全無料 ／ いつでもブロックOK</p>
   </section>
 
@@ -574,11 +628,12 @@ transition: opacity 0.55s ease, transform 0.55s ease;
     <div class="section-eyebrow">Free Gift</div>
     <h2 class="section-title">プレゼントを受け取る</h2>
     <p class="cta-count">すでに <strong>2,480名</strong> 以上が受け取り済み</p>
-    <a href="https://lin.ee/SwuxCuX" class="cta-btn">
+    <a href="javascript:void(0)" onclick="openLine()" class="cta-btn">
       <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
       LINEでプレゼントを受け取る
       <span class="pulse"></span>
     </a>
+    <button onclick="copyLine()" class="copy-btn">📋 LINEのURLをコピーして開く</button>
     <p class="cta-note">※ 完全無料 ／ 個人情報の入力不要<br>※ いつでもブロックOK</p>
   </section>
 
@@ -588,23 +643,83 @@ transition: opacity 0.55s ease, transform 0.55s ease;
 <!-- STICKY BAR -->
 
 <div class="sticky-bar" id="stickyBar">
-  <a href="https://lin.ee/SwuxCuX" class="cta-btn">
+  <a href="javascript:void(0)" onclick="openLine()" class="cta-btn">
     <svg viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
     プレゼントを受け取る
     <span class="pulse"></span>
   </a>
 </div>
 
-<script>
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+<div class="toast" id="toast">✅ URLをコピーしました！ブラウザに貼り付けてください</div>
 
-  const sticky = document.getElementById('stickyBar');
-  const mainCta = document.getElementById('mainCta');
-  new IntersectionObserver(([entry]) => {
-    sticky.classList.toggle('visible', !entry.isIntersecting);
+<script>
+  var LINE_URL = 'https://lin.ee/SwuxCuX';
+
+  // TikTok browser detection
+  var ua = navigator.userAgent || '';
+  var isTikTok = /TikTok|BytedanceWebview|musical_ly/i.test(ua);
+  if (isTikTok) {
+    document.body.classList.add('is-tiktok');
+  }
+
+  // Open LINE - try multiple methods
+  function openLine() {
+    // Method 1: Try direct navigation
+    window.location.href = LINE_URL;
+
+    // Method 2: Fallback after delay - try window.open
+    setTimeout(function() {
+      try { window.open(LINE_URL, '_blank'); } catch(e) {}
+    }, 300);
+  }
+
+  // Copy LINE URL to clipboard
+  function copyLine() {
+    var toast = document.getElementById('toast');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(LINE_URL).then(function() {
+        showToast();
+      }).catch(function() {
+        fallbackCopy();
+      });
+    } else {
+      fallbackCopy();
+    }
+  }
+
+  function fallbackCopy() {
+    var ta = document.createElement('textarea');
+    ta.value = LINE_URL;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showToast();
+    } catch(e) {
+      alert('URLをコピーできませんでした。\n以下を手動でコピーしてください：\n' + LINE_URL);
+    }
+    document.body.removeChild(ta);
+  }
+
+  function showToast() {
+    var toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 3000);
+  }
+
+  // Scroll fade-in
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+
+  // Sticky bar
+  var sticky = document.getElementById('stickyBar');
+  var mainCta = document.getElementById('mainCta');
+  new IntersectionObserver(function(entries) {
+    sticky.classList.toggle('visible', !entries[0].isIntersecting);
   }, { threshold: 0 }).observe(mainCta);
 </script>
 
